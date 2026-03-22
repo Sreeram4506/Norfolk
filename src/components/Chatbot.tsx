@@ -3,8 +3,8 @@ import { X, Send, Bot, User, Loader2 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { siteConfig, aboutConfig, collectionsConfig, exhibitionsConfig, visitConfig } from '../config';
 
-const CHAT_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const API_KEY = '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';
+// AI Proxy Endpoint
+const PROXY_URL = '/api/chat';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -70,22 +70,22 @@ const Chatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(CHAT_API_URL, {
+      // Use the serverless proxy to avoid CORS issues on the deployed site
+      const response = await fetch(PROXY_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`
         },
         body: JSON.stringify({
-          model: 'meta/llama-3.1-405b-instruct',
           messages: [systemPrompt, ...messages, userMessage],
+          model: 'meta/llama-3.1-405b-instruct',
           temperature: 0.7,
           max_tokens: 512,
         })
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch response');
+        throw new Error(`Server responded with ${response.status}`);
       }
 
       const data = await response.json();
@@ -97,9 +97,11 @@ const Chatbot: React.FC = () => {
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Chat error:', error);
+      
+      // Fallback: If proxy fails or is not found, try a more direct approach or show error
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: "I apologize, but I'm having trouble connecting right now. Please try again later or reach out to us at hello@norfolk-dev.com."
+        content: "I apologize, but I'm having trouble connecting right now. This is often due to a connection error. Please try again in a few moments or reach out directly at hello@norfolk-dev.com."
       }]);
     } finally {
       setIsLoading(false);

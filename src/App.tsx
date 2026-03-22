@@ -18,6 +18,7 @@ import Collections from './sections/Collections';
 import Testimonials from './sections/Testimonials';
 import Visit from './sections/Visit';
 import Footer from './sections/Footer';
+import Chatbot from './components/Chatbot';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,6 +114,9 @@ function App() {
       <div id="footer-section">
         <Footer />
       </div>
+
+      {/* AI Chatbot */}
+      <Chatbot />
     </div>
   );
 }

@@ -165,7 +165,7 @@ export const aboutConfig: AboutConfig = {
     { value: "100+", label: "Master Craftsmen" },
     { value: "100%", label: "Uncompromised Quality" },
     { value: "98%", label: "Client Satisfaction" },
-    { value: "$2B+", label: "Project Value Delivered" },
+    { value: "$15M+", label: "Project Value Delivered" },
   ],
 };
 

@@ -12,7 +12,6 @@ const About = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
 
-  if (!aboutConfig.headline) return null;
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -97,10 +96,17 @@ const About = () => {
     };
   }, []);
 
-  // Split gallery images into 3 columns
-  const col1Images = aboutConfig.galleryImages.filter((_, i) => i % 3 === 0);
-  const col2Images = aboutConfig.galleryImages.filter((_, i) => i % 3 === 1);
-  const col3Images = aboutConfig.galleryImages.filter((_, i) => i % 3 === 2);
+  // Split gallery images into 2 columns for a balanced 2x2 grid (if 4 images) or 3 columns
+  const isFour = aboutConfig.galleryImages.length === 4;
+  const col1Images = isFour 
+    ? [aboutConfig.galleryImages[0], aboutConfig.galleryImages[2]] 
+    : aboutConfig.galleryImages.filter((_, i) => i % 3 === 0);
+  const col2Images = isFour 
+    ? [aboutConfig.galleryImages[1], aboutConfig.galleryImages[3]] 
+    : aboutConfig.galleryImages.filter((_, i) => i % 3 === 1);
+  const col3Images = isFour 
+    ? [] 
+    : aboutConfig.galleryImages.filter((_, i) => i % 3 === 2);
 
   return (
     <section
@@ -113,9 +119,11 @@ const About = () => {
         <p className="reveal-text museo-label text-white/50 mb-6" style={{ willChange: 'transform, opacity' }}>
           {aboutConfig.label}
         </p>
-        <h2 className="reveal-text museo-headline text-white text-4xl md:text-5xl lg:text-7xl mb-8" style={{ willChange: 'transform, opacity' }}>
-          {aboutConfig.headline}
-        </h2>
+        {aboutConfig.headline && (
+          <h2 className="reveal-text museo-headline text-white text-4xl md:text-5xl lg:text-7xl mb-8" style={{ willChange: 'transform, opacity' }}>
+            {aboutConfig.headline}
+          </h2>
+        )}
         <p className="reveal-text museo-body text-white/60 text-lg md:text-xl max-w-2xl" style={{ willChange: 'transform, opacity' }}>
           {aboutConfig.description}
         </p>
@@ -124,14 +132,14 @@ const About = () => {
       {/* Gallery — overflow hidden to prevent parallax leaking into stats */}
       <div className="overflow-hidden">
         <div ref={galleryRef} className="relative max-w-7xl mx-auto px-4 lg:px-8 pb-16">
-          <div className="grid grid-cols-3 gap-4 lg:gap-5">
+          <div className={isFour ? "grid grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto" : "grid grid-cols-3 gap-4 lg:gap-5"}>
 
             {/* Column 1 — drifts up (reduced speed) */}
             <div className="gallery-col space-y-4 lg:space-y-5 will-change-transform" data-speed="-80">
               {col1Images.map((img, i) => (
                 <div key={i} className="gallery-img-wrap overflow-hidden will-change-transform" data-offset={i === 0 ? "60" : "120"}>
-                  <img src={img.src} alt={img.alt} className="w-full h-auto object-cover" style={{ aspectRatio: i === 0 ? '3/4' : '4/5' }} />
-                  <p className="museo-label text-white/25 mt-3 text-[10px]">{img.label}</p>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto object-cover" style={{ aspectRatio: isFour ? '3/4' : (i === 0 ? '3/4' : '4/5') }} />
+                  {img.label && <p className="museo-label text-white/25 mt-3 text-[10px]">{img.label}</p>}
                 </div>
               ))}
             </div>
@@ -140,21 +148,23 @@ const About = () => {
             <div className="gallery-col space-y-4 lg:space-y-5 pt-20 lg:pt-32 will-change-transform" data-speed="100">
               {col2Images.map((img, i) => (
                 <div key={i} className="gallery-img-wrap overflow-hidden will-change-transform" data-offset={i === 0 ? "80" : "160"}>
-                  <img src={img.src} alt={img.alt} className="w-full h-auto object-cover" style={{ aspectRatio: '3/4' }} />
-                  <p className="museo-label text-white/25 mt-3 text-[10px]">{img.label}</p>
+                  <img src={img.src} alt={img.alt} className="w-full h-auto object-cover" style={{ aspectRatio: isFour ? '4/5' : '3/4' }} />
+                  {img.label && <p className="museo-label text-white/25 mt-3 text-[10px]">{img.label}</p>}
                 </div>
               ))}
             </div>
 
-            {/* Column 3 — drifts up faster */}
-            <div className="gallery-col space-y-4 lg:space-y-5 will-change-transform" data-speed="-120">
-              {col3Images.map((img, i) => (
-                <div key={i} className="gallery-img-wrap overflow-hidden will-change-transform" data-offset={i === 0 ? "40" : "140"}>
-                  <img src={img.src} alt={img.alt} className="w-full h-auto object-cover" style={{ aspectRatio: i === 0 ? '4/5' : '3/4' }} />
-                  <p className="museo-label text-white/25 mt-3 text-[10px]">{img.label}</p>
-                </div>
-              ))}
-            </div>
+            {/* Column 3 — only rendered if not 4 images */}
+            {!isFour && (
+              <div className="gallery-col space-y-4 lg:space-y-5 will-change-transform" data-speed="-120">
+                {col3Images.map((img, i) => (
+                  <div key={i} className="gallery-img-wrap overflow-hidden will-change-transform" data-offset={i === 0 ? "40" : "140"}>
+                    <img src={img.src} alt={img.alt} className="w-full h-auto object-cover" style={{ aspectRatio: i === 0 ? '4/5' : '3/4' }} />
+                    {img.label && <p className="museo-label text-white/25 mt-3 text-[10px]">{img.label}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

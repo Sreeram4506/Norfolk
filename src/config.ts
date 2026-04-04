@@ -150,15 +150,13 @@ export const heroConfig: HeroConfig = {
 
 export const aboutConfig: AboutConfig = {
   label: "Established 1987",
-  headline: "Exceptional Quality in Every Detail",
+  headline: "",
   description: "At Norfolk Development, we don't just build structures; we craft environments that stand the test of time. Our unwavering commitment to exceptional quality ensures that every joint, every finish, and every layout is executed with surgical precision. From large-scale industrial hubs to intimate luxury residences, our signature is excellence without compromise.",
   bottomText: "We believe every structure tells a story. Our commitment to sustainable building practices and cutting-edge technology ensures that each project not only meets today's needs but anticipates tomorrow's challenges. From groundbreaking to grand opening, we're with you every step of the way.",
   galleryImages: [
-    { src: "/images/gallery-1.jpg", alt: "Construction team reviewing blueprints", label: "Our Team" },
     { src: "/images/gallery-residential.jpg", alt: "Luxury home interior office space", label: "Residential" },
     { src: "/images/gallery-3.jpg", alt: "Construction site aerial view", label: "In Progress" },
     { src: "/images/gallery-4.jpg", alt: "Modern office interior", label: "Commercial" },
-    { src: "/images/gallery-5.jpg", alt: "Construction crane at sunset", label: "Our Craft" },
     { src: "/images/gallery-6.jpg", alt: "Sustainable green building", label: "Sustainable" },
   ],
   stats: [
@@ -213,13 +211,6 @@ export const collectionsConfig: CollectionsConfig = {
   ctaText: "Learn More",
   collections: [
     { 
-      id: 1, 
-      title: "Commercial Construction", 
-      year: "High-Rise & Office", 
-      description: "From corporate headquarters to retail centers, we deliver commercial spaces that inspire productivity and growth. Our expertise includes steel-frame construction, glass facades, and sustainable building systems.", 
-      image: "/images/service-1.jpg" 
-    },
-    { 
       id: 2, 
       title: "Residential Development", 
       year: "Luxury Homes & Communities", 
@@ -227,18 +218,18 @@ export const collectionsConfig: CollectionsConfig = {
       image: "/images/service-2.jpg" 
     },
     { 
-      id: 3, 
-      title: "Industrial & Logistics", 
-      year: "Warehouses & Facilities", 
-      description: "Efficient, durable, and scalable industrial solutions. We build warehouses, distribution centers, and manufacturing facilities that optimize operations and support business growth.", 
-      image: "/images/service-3.jpg" 
-    },
-    { 
       id: 4, 
       title: "Renovation & Restoration", 
       year: "Historic & Modern", 
       description: "Preserving heritage while embracing innovation. Our restoration team specializes in breathing new life into historic structures and modernizing existing buildings for contemporary use.", 
       image: "/images/service-4.jpg" 
+    },
+    { 
+      id: 5, 
+      title: "Completed Masterpieces", 
+      year: "Excellence Delivered", 
+      description: "A showcase of our successfully completed projects, where vision meets reality. These structures stand as a testament to our commitment to quality, durability, and architectural brilliance.", 
+      image: "/images/Completed.jpeg" 
     },
   ],
 };

@@ -66,13 +66,19 @@
     @apply bg-[#8c8c91] text-white antialiased;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+  }
+}
+
+/* Only hide cursor on desktop (non-touch) devices */
+@media (pointer: fine) {
+  body, a, button {
     cursor: none;
   }
-  
-  ::selection {
-    background: rgba(255, 255, 255, 0.3);
-    color: inherit;
-  }
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.3);
+  color: inherit;
 }
 
 @layer components {

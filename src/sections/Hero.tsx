@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { heroConfig } from '../config';
@@ -14,6 +14,8 @@ const Hero = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -72,10 +74,17 @@ const Hero = () => {
     });
     triggersRef.current.push(scrollTrigger);
 
+    // Handle scroll for sticky nav
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       triggersRef.current.forEach((t) => t.kill());
       triggersRef.current = [];
       tl.kill();
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -102,7 +111,9 @@ const Hero = () => {
       {/* Navigation Layer */}
       <nav
         ref={navRef}
-        className="absolute top-0 left-0 w-full z-50 px-6 lg:px-16 py-8 flex items-center justify-between will-change-transform"
+        className={`fixed top-0 left-0 w-full z-[100] px-6 lg:px-16 py-6 flex items-center justify-between transition-all duration-300 ${
+          isScrolled || isMobileMenuOpen ? 'bg-black/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+        }`}
       >
         <div className="flex items-center gap-4">
           <img 
@@ -121,13 +132,75 @@ const Hero = () => {
             <a key={i} href={link.href} className="museo-label text-white/80 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase">{link.label}</a>
           ))}
         </div>
-        {/* Mobile menu simple trigger (optional) */}
+        {/* Mobile menu trigger - must be outside overlay z-context */}
         <div className="md:hidden">
-          <button aria-label="Menu" className="text-white/80 hover:text-white p-2">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <button 
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            className="text-white/80 hover:text-white p-3 relative z-[210] cursor-pointer touch-manipulation"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
+            type="button"
+          >
+            {isMobileMenuOpen ? (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            ) : (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            )}
           </button>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay - rendered OUTSIDE nav to avoid stacking context issues */}
+      <div 
+        className={`md:hidden fixed inset-0 bg-[#050505] z-[200] flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.7,0,0.3,1)] ${
+          isMobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto visible' : 'opacity-0 -translate-y-full pointer-events-none invisible'
+        }`}
+        style={{ cursor: 'auto' }}
+      >
+        {/* Close button inside overlay */}
+        <button
+          aria-label="Close menu"
+          className="absolute top-6 right-6 text-white/80 hover:text-white p-3 z-[210] cursor-pointer touch-manipulation"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMobileMenuOpen(false);
+          }}
+          type="button"
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <div className="flex flex-col items-center gap-6 md:gap-8 overflow-y-auto w-full py-20">
+          {heroConfig.navLinks.map((link, i) => (
+            <a 
+              key={i} 
+              href={link.href} 
+              className={`museo-headline text-white text-3xl md:text-4xl lg:text-5xl uppercase tracking-tighter transition-all duration-500 text-center w-full py-2 cursor-pointer ${
+                isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ 
+                transitionDelay: `${(i + 1) * 100}ms`
+              }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          
+          <div className={`mt-12 flex flex-col items-center gap-6 transition-all duration-500 delay-500 ${
+            isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}>
+            <p className="museo-label text-white/40 text-[10px] tracking-[0.2em] uppercase">Connect With Us</p>
+            <div className="flex gap-8">
+              {heroConfig.socialLinks.map((link, i) => (
+                <a key={i} href={link.href} className="museo-label text-white/70 hover:text-white transition-colors text-[10px] tracking-[0.15em] uppercase cursor-pointer">{link.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Main Hero Content (Centered) */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 lg:px-12 pointer-events-none">

@@ -159,8 +159,8 @@ export const aboutConfig: AboutConfig = {
   galleryImages: [
     { src: "/images/gallery-residential.jpg", alt: "Luxury home interior office space", label: "Residential" },
     { src: "/images/gallery-3.jpg", alt: "Construction site aerial view", label: "In Progress" },
-    { src: "/images/gallery-4.jpg", alt: "Modern office interior", label: "Commercial" },
-    { src: "/images/gallery-6.jpg", alt: "Sustainable green building", label: "Sustainable" },
+    { src: "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (3).jpeg", alt: "South Boston Residential", label: "Small Scale" },
+    { src: "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (7).jpeg", alt: "Local Neighborhood Development", label: "Local Projects" },
   ],
   stats: [
     { value: "100+", label: "Master Craftsmen" },

@@ -14,12 +14,6 @@ body {
 /* Global link hover effects */
 a {
   text-decoration: none;
-  cursor: none;
-}
-
-/* Button base styles */
-button {
-  cursor: none;
 }
 
 /* Image loading optimization */

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MapPin, Clock, Calendar, Ticket } from 'lucide-react';
+import { MapPin, Clock, Calendar, Ticket, ArrowUpRight } from 'lucide-react';
 import { visitConfig } from '../config';
 import ProjectModal from '../components/ProjectModal';
 
@@ -16,6 +16,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWi
 
 const Visit = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<string | undefined>(undefined);
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
@@ -82,7 +83,10 @@ const Visit = () => {
           return (
             <div 
               key={i} 
-              onClick={isClickable ? () => setIsModalOpen(true) : undefined}
+              onClick={isClickable ? () => {
+                setModalType(card.title === "Request a Quote" ? "Other" : "Other");
+                setIsModalOpen(true);
+              } : undefined}
               data-cursor={isClickable ? "hover" : undefined}
               className={`info-card p-8 border border-white/10 transition-colors ${isClickable ? 'cursor-pointer hover:border-white/40 group' : 'hover:border-white/20'}`}
             >
@@ -93,9 +97,12 @@ const Visit = () => {
                 dangerouslySetInnerHTML={{ __html: card.content }}
               />
               {isClickable && (
-                <p className="museo-label text-[9px] text-white/30 mt-6 uppercase tracking-widest group-hover:text-white transition-colors">
-                  Click to open form →
-                </p>
+                <div className="mt-8">
+                  <span className="inline-flex items-center gap-2 museo-label text-[10px] text-white/70 px-4 py-2 border border-white/20 group-hover:border-white group-hover:bg-white group-hover:text-black transition-all uppercase tracking-widest font-medium">
+                    {card.title === "Schedule a Meeting" ? "Book Now" : "Get Quote"} 
+                    <ArrowUpRight className="w-3 h-3" strokeWidth={2.5} />
+                  </span>
+                </div>
               )}
             </div>
           );
@@ -118,7 +125,11 @@ const Visit = () => {
       {/* Project Inquiry Modal */}
       <ProjectModal 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        onClose={() => {
+          setIsModalOpen(false);
+          setModalType(undefined);
+        }} 
+        initialType={modalType}
       />
     </section>
   );

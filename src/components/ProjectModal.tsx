@@ -6,18 +6,28 @@ import { gsap } from 'gsap';
 interface ProjectModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialType?: string;
 }
 
-const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose }) => {
+const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, initialType }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    user_name: '',
+    user_email: '',
+    project_type: 'Residential',
+    message: ''
+  });
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      if (initialType) {
+        setFormData(prev => ({ ...prev, project_type: initialType }));
+      }
       // Animate in
       if (modalRef.current && contentRef.current) {
         gsap.set(modalRef.current, { display: 'flex', opacity: 0 });
@@ -36,7 +46,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose }) => {
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [isOpen]);
+  }, [isOpen, initialType]);
 
   const handleClose = () => {
     if (modalRef.current && contentRef.current) {
@@ -140,6 +150,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose }) => {
                 <label className="museo-label text-white/40 text-[10px] uppercase tracking-wider">Project Type</label>
                 <select 
                   name="project_type"
+                  value={formData.project_type}
+                  onChange={(e) => setFormData(prev => ({ ...prev, project_type: e.target.value }))}
                   className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white museo-body focus:outline-none focus:border-white/30 transition-colors appearance-none"
                 >
                   <option value="Residential" className="bg-[#0a0a0a]">Residential Construction</option>

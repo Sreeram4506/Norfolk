@@ -93,6 +93,7 @@ export interface InfoCard {
   icon: string;
   title: string;
   content: string;
+  isClickable?: boolean;
 }
 
 export interface VisitConfig {
@@ -266,12 +267,14 @@ export const visitConfig: VisitConfig = {
     { 
       icon: "Calendar", 
       title: "Schedule a Meeting", 
-      content: "Book a consultation with our project team to discuss your construction needs and get a detailed proposal." 
+      content: "Book a consultation with our project team to discuss your construction needs and get a detailed proposal.",
+      isClickable: true
     },
     { 
       icon: "Ticket", 
       title: "Request a Quote", 
-      content: "Get a comprehensive project estimate including timeline, materials, and cost breakdown for your construction project." 
+      content: "Get a comprehensive project estimate including timeline, materials, and cost breakdown for your construction project.",
+      isClickable: true
     },
   ],
 };

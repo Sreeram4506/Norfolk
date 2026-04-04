@@ -78,14 +78,25 @@ const Visit = () => {
       >
         {visitConfig.infoCards.map((card, i) => {
           const IconComponent = iconMap[card.icon];
+          const isClickable = card.isClickable;
           return (
-            <div key={i} className="info-card p-8 border border-white/10 hover:border-white/20 transition-colors">
-              {IconComponent && <IconComponent className="w-8 h-8 text-white/50 mb-6" strokeWidth={1.5} />}
+            <div 
+              key={i} 
+              onClick={isClickable ? () => setIsModalOpen(true) : undefined}
+              data-cursor={isClickable ? "hover" : undefined}
+              className={`info-card p-8 border border-white/10 transition-colors ${isClickable ? 'cursor-pointer hover:border-white/40 group' : 'hover:border-white/20'}`}
+            >
+              {IconComponent && <IconComponent className={`w-8 h-8 mb-6 transition-colors ${isClickable ? 'text-white/40 group-hover:text-white' : 'text-white/50'}`} strokeWidth={1.5} />}
               <h3 className="museo-headline text-white text-xl mb-3">{card.title}</h3>
               <div
                 className="museo-body text-white/60 text-sm"
                 dangerouslySetInnerHTML={{ __html: card.content }}
               />
+              {isClickable && (
+                <p className="museo-label text-[9px] text-white/30 mt-6 uppercase tracking-widest group-hover:text-white transition-colors">
+                  Click to open form →
+                </p>
+              )}
             </div>
           );
         })}

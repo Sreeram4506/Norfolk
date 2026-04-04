@@ -7,10 +7,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
+  const intervalRef = useRef<any>(null);
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
       videoRef.current.play().catch(() => {});
+    }
+    if (exhibit.gallery && exhibit.gallery.length > 0) {
+      intervalRef.current = setInterval(() => {
+        setActiveImageIndex((prev: number) => (prev + 1) % exhibit.gallery.length);
+      }, 1200); // Change image every 1.2s for a better flow
     }
   };
 
@@ -18,6 +25,11 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
     if (videoRef.current) {
       videoRef.current.pause();
     }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    setActiveImageIndex(0);
   };
 
   return (
@@ -29,7 +41,7 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
       onTouchStart={handleMouseEnter}
       onTouchEnd={handleMouseLeave}
     >
-      {/* Media (Image or Video) */}
+      {/* Media (Image, Video, or Gallery) */}
       <div className="relative aspect-[4/3] overflow-hidden">
         {exhibit.video ? (
           <video
@@ -40,6 +52,19 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
             muted
             playsInline
           />
+        ) : exhibit.gallery ? (
+          <div className="w-full h-full relative">
+            {exhibit.gallery.map((src: string, index: number) => (
+              <img
+                key={src}
+                src={src}
+                alt={exhibit.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${
+                  index === activeImageIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+                }`}
+              />
+            ))}
+          </div>
         ) : exhibit.image ? (
           <img
             src={exhibit.image}

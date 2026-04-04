@@ -57,6 +57,7 @@ export interface Exhibition {
   title: string;
   image?: string;
   video?: string;
+  gallery?: string[];
   date: string;
 }
 
@@ -66,6 +67,7 @@ export interface ExhibitionsConfig {
   ctaText: string;
   exhibitions: Exhibition[];
 }
+
 
 export interface Collection {
   id: number;
@@ -204,6 +206,22 @@ export const exhibitionsConfig: ExhibitionsConfig = {
       date: "In Progress" 
     },
 
+    { 
+      id: 6, 
+      title: "South Boston Portfolio", 
+      gallery: [
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (1).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (2).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (3).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (4).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (5).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (6).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (7).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (8).jpeg",
+        "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM.jpeg",
+      ],
+      date: "New Development" 
+    },
   ],
 };
 

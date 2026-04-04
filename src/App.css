@@ -72,3 +72,13 @@ button:focus-visible {
     --border-opacity: 0.5;
   }
 }
+
+@keyframes scroll-line {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-scroll-line {
+  animation: scroll-line 2.5s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}

@@ -163,8 +163,8 @@ export const aboutConfig: AboutConfig = {
   stats: [
     { value: "100+", label: "Master Craftsmen" },
     { value: "100%", label: "Uncompromised Quality" },
-    { value: "98%", label: "Client Satisfaction" },
-    { value: "$15M+", label: "Project Value Delivered" },
+    { value: "100%", label: "Client Satisfaction" },
+    { value: "$30M+", label: "Project Value Delivered" },
   ],
 };
 
@@ -203,12 +203,7 @@ export const exhibitionsConfig: ExhibitionsConfig = {
       video: "/videos/KItchen Westwood.mp4", 
       date: "In Progress" 
     },
-    { 
-      id: 6, 
-      title: "Westwood Fire Training", 
-      video: "/videos/Westwood Fire Training.mov", 
-      date: "In Progress" 
-    },
+
   ],
 };
 

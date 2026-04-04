@@ -202,6 +202,12 @@ export const exhibitionsConfig: ExhibitionsConfig = {
       video: "/videos/KItchen Westwood.mp4", 
       date: "In Progress" 
     },
+    { 
+      id: 6, 
+      title: "Westwood Fire Training", 
+      video: "/videos/Westwood Fire Training.mov", 
+      date: "In Progress" 
+    },
   ],
 };
 

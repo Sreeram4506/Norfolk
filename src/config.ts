@@ -159,7 +159,7 @@ export const aboutConfig: AboutConfig = {
   galleryImages: [
     { src: "/images/gallery-residential.jpg", alt: "Luxury home interior office space", label: "Residential" },
     { src: "/images/gallery-3.jpg", alt: "Construction site aerial view", label: "In Progress" },
-    { src: "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (3).jpeg", alt: "South Boston Residential", label: "Small Scale" },
+    { src: "/images/south-boston-residential.png", alt: "South Boston Residential", label: "Small Scale" },
     { src: "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (7).jpeg", alt: "Local Neighborhood Development", label: "Local Projects" },
   ],
   stats: [
@@ -175,6 +175,12 @@ export const exhibitionsConfig: ExhibitionsConfig = {
   headline: "Signature Projects",
   ctaText: "View Project",
   exhibitions: [
+    { 
+      id: 7, 
+      title: "Upcoming Project, Westwood", 
+      image: "/images/upcoming .jpeg", 
+      date: "Coming Soon" 
+    },
     { 
       id: 1, 
       title: "Porter Estate, Westwood MA", 
@@ -210,6 +216,8 @@ export const exhibitionsConfig: ExhibitionsConfig = {
       id: 6, 
       title: "South Boston Portfolio", 
       gallery: [
+        "/images/South Boston/1.jpeg",
+        "/images/South Boston/2.jpeg",
         "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (1).jpeg",
         "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (2).jpeg",
         "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (3).jpeg",
@@ -246,9 +254,9 @@ export const collectionsConfig: CollectionsConfig = {
     },
     { 
       id: 5, 
-      title: "Completed Masterpieces", 
-      year: "Excellence Delivered", 
-      description: "A showcase of our successfully completed projects, where vision meets reality. These structures stand as a testament to our commitment to quality, durability, and architectural brilliance.", 
+      title: "Upcoming Projects", 
+      year: "Future Horizons", 
+      description: "A preview of our next generation of developments. We are currently breaking ground on ambitious projects that will redefine modern living and commercial spaces with cutting-edge design and sustainability.", 
       image: "/images/Completed.jpeg" 
     },
   ],

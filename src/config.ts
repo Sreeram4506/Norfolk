@@ -159,7 +159,7 @@ export const aboutConfig: AboutConfig = {
   galleryImages: [
     { src: "/images/gallery-residential.jpg", alt: "Luxury home interior office space", label: "Residential" },
     { src: "/images/gallery-3.jpg", alt: "Construction site aerial view", label: "In Progress" },
-    { src: "/images/south-boston-residential.png", alt: "South Boston Residential", label: "Small Scale" },
+    { src: "/images/6.jpeg", alt: "South Boston Residential", label: "Small Scale" },
     { src: "/images/South Boston/WhatsApp Image 2026-04-04 at 8.11.23 PM (7).jpeg", alt: "Local Neighborhood Development", label: "Local Projects" },
   ],
   stats: [
@@ -243,14 +243,14 @@ export const collectionsConfig: CollectionsConfig = {
       title: "Residential Development", 
       year: "Luxury Homes & Communities", 
       description: "We create living spaces that blend comfort with elegance. Our residential portfolio includes luxury estates, multi-family complexes, and master-planned communities designed for modern living.", 
-      image: "/images/service-2.jpg" 
+      image: "/images/1.jpeg" 
     },
     { 
       id: 4, 
       title: "Renovation & Restoration", 
       year: "Historic & Modern", 
       description: "Preserving heritage while embracing innovation. Our restoration team specializes in breathing new life into historic structures and modernizing existing buildings for contemporary use.", 
-      image: "/images/service-4.jpg" 
+      image: "/images/5.jpeg" 
     },
     { 
       id: 5, 

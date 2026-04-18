@@ -186,9 +186,20 @@ const About = () => {
       {/* Bottom text */}
       {aboutConfig.bottomText && (
         <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-16 pb-32 bg-[#050505]">
-          <div className="grid grid-cols-12">
+          <div className="grid grid-cols-12 gap-y-12 md:gap-y-0 items-center">
+            {aboutConfig.bottomImage && (
+              <div className="col-span-12 md:col-span-6">
+                <div className="reveal-text overflow-hidden rounded-sm border border-white/5">
+                  <img 
+                    src={aboutConfig.bottomImage} 
+                    alt="Construction site detail" 
+                    className="w-full h-auto object-cover opacity-80 hover:opacity-100 transition-opacity duration-700" 
+                  />
+                </div>
+              </div>
+            )}
             <div className="col-span-12 md:col-span-5 md:col-start-8">
-              <p className="reveal-text museo-body text-white/50 text-base lg:text-lg">
+              <p className="reveal-text museo-body text-white/50 text-base lg:text-lg leading-relaxed">
                 {aboutConfig.bottomText}
               </p>
             </div>

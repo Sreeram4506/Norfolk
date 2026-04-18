@@ -48,6 +48,7 @@ export interface AboutConfig {
   headline: string;
   description: string;
   bottomText: string;
+  bottomImage?: string;
   galleryImages: GalleryImage[];
   stats: StatItem[];
 }
@@ -133,7 +134,7 @@ export const heroConfig: HeroConfig = {
   brandLeft: "NORFOLK",
   brandRight: "DEVELOPMENT",
   tagline: "Building Tomorrow's Landmarks Today",
-  badge: "Norfolk, Virginia",
+  badge: "Norfolk County, MA",
   since: "Since 1987",
   email: "hello@norfolk-dev.com",
   heroImage: "/images/hero-building.png",
@@ -156,6 +157,7 @@ export const aboutConfig: AboutConfig = {
   headline: "",
   description: "At Norfolk Development, we don't just build structures; we craft environments that stand the test of time. Our unwavering commitment to exceptional quality ensures that every joint, every finish, and every layout is executed with surgical precision. From large-scale industrial hubs to intimate luxury residences, our signature is excellence without compromise.",
   bottomText: "We believe every structure tells a story. Our commitment to sustainable building practices and cutting-edge technology ensures that each project not only meets today's needs but anticipates tomorrow's challenges. From groundbreaking to grand opening, we're with you every step of the way.",
+  bottomImage: "/images/7.jpeg",
   galleryImages: [
     { src: "/images/gallery-residential.jpg", alt: "Luxury home interior office space", label: "Residential" },
     { src: "/images/gallery-3.jpg", alt: "Construction site aerial view", label: "In Progress" },
@@ -277,8 +279,8 @@ export const visitConfig: VisitConfig = {
   infoCards: [
     { 
       icon: "MapPin", 
-      title: "Visit Our Office", 
-      content: "1200 Waterfront Drive<br />Norfolk, VA 23510<br />United States" 
+      title: "Our Location", 
+      content: "Norfolk County MA<br />Serving Westwood, Norwood, Walpole, Canton, Sharon, etc.." 
     },
     { 
       icon: "Clock", 
@@ -317,10 +319,10 @@ export const footerConfig: FooterConfig = {
   quickLinksTitle: "Quick Links",
   contactTitle: "Contact",
   contactItems: [
-    "1200 Waterfront Drive",
-    "Norfolk, VA 23510",
+    "Norfolk County MA",
+    "Serving Westwood, Norwood, Walpole, Canton, Sharon, etc..",
     "hello@norfolk-dev.com",
-    "+1 (757) 555-0120",
+    '<a href="tel:7812232490" class="hover:text-white transition-colors">781-223-2490</a>',
   ],
   bottomLinks: [
     { label: "Privacy Policy", href: "#" },

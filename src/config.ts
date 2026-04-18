@@ -85,13 +85,6 @@ export interface CollectionsConfig {
   collections: Collection[];
 }
 
-export interface TestimonialsConfig {
-  quote: string;
-  authorName: string;
-  authorTitle: string;
-  authorImage: string;
-}
-
 export interface InfoCard {
   icon: string;
   title: string;
@@ -168,7 +161,7 @@ export const aboutConfig: AboutConfig = {
     { value: "100+", label: "Master Craftsmen" },
     { value: "100%", label: "Uncompromised Quality" },
     { value: "100%", label: "Client Satisfaction" },
-    { value: "$30M+", label: "Project Value Delivered" },
+    { value: "50+", label: "Project Value Delivered" },
   ],
 };
 
@@ -262,13 +255,6 @@ export const collectionsConfig: CollectionsConfig = {
       image: "/images/Completed.jpeg" 
     },
   ],
-};
-
-export const testimonialsConfig: TestimonialsConfig = {
-  quote: "Norfolk Development transformed our vision into reality. Their attention to detail, commitment to quality, and ability to deliver on time exceeded all expectations. They didn't just build a structure; they created a landmark that defines our company's presence.",
-  authorName: "Robert Mitchell",
-  authorTitle: "CEO, TechHub Industries",
-  authorImage: "/images/testimonial-author.jpg",
 };
 
 export const visitConfig: VisitConfig = {

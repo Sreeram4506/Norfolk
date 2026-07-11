@@ -3,9 +3,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { heroConfig } from '../config';
 
+interface HeroProps {
+  heroVideo?: string;
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero = () => {
+const Hero = ({ heroVideo = '/videos/hero.mp4' }: HeroProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const titleLeftRef = useRef<HTMLHeadingElement>(null);
@@ -18,6 +22,7 @@ const Hero = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const resolvedHeroVideo = heroVideo?.startsWith('data:') ? heroVideo : `${heroVideo || '/videos/hero.mp4'}#t=6`;
 
   if (!heroConfig.brandLeft && !heroConfig.brandRight) return null;
 
@@ -88,6 +93,13 @@ const Hero = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {});
+    }
+  }, [heroVideo]);
+
   return (
     <section
       ref={sectionRef}
@@ -97,6 +109,7 @@ const Hero = () => {
       <div ref={videoContainerRef} className="absolute inset-0 z-0 will-change-transform">
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/90 z-10 pointer-events-none" />
         <video
+          key={resolvedHeroVideo}
           ref={videoRef}
           className="w-full h-full object-cover"
           autoPlay
@@ -104,7 +117,7 @@ const Hero = () => {
           muted
           playsInline
         >
-          <source src="/videos/hero.mp4#t=6" type="video/mp4" />
+          <source src={resolvedHeroVideo} type="video/mp4" />
         </video>
       </div>
 

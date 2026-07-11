@@ -1,10 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import type { SiteContent } from '../lib/siteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FeaturedProject = () => {
+interface FeaturedProjectProps {
+  content?: SiteContent;
+}
+
+const FeaturedProject = ({ content }: FeaturedProjectProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -75,7 +80,7 @@ const FeaturedProject = () => {
       <div className="absolute inset-0 z-0 scale-105 pointer-events-none">
         <video
           ref={videoRef}
-          src="/videos/Westwood Fire Training.mov"
+          src={content?.featuredProjectVideo || '/videos/Westwood Fire Training.mov'}
           className="w-full h-full object-cover opacity-70 contrast-110 brightness-90 saturate-110"
           autoPlay
           muted
@@ -113,24 +118,24 @@ const FeaturedProject = () => {
           ref={labelRef}
           className="museo-label text-white/60 mb-6 tracking-[0.3em] text-[10px] sm:text-xs uppercase"
         >
-          Specialized Infrastructure
+          {content?.featuredProjectLabel || 'Specialized Infrastructure'}
         </p>
         <h2 
           ref={titleRef}
           className="museo-headline text-white text-5xl md:text-7xl lg:text-9xl leading-[1] max-w-4xl"
         >
-          Westwood <br />
-          <span className="italic text-white/80">Fire Training</span>
+          {content?.featuredProjectTitle || 'Westwood'} <br />
+          <span className="italic text-white/80">{content?.featuredProjectSubtitle || 'Fire Training'}</span>
         </h2>
         
         <div className="mt-16 flex flex-col sm:flex-row gap-12 sm:gap-24 items-start">
           <div className="flex flex-col gap-2">
             <span className="museo-label text-white/40 text-[9px] uppercase tracking-widest">Status</span>
-            <span className="text-white text-lg museo-label">In Progress / Specialized Facility</span>
+            <span className="text-white text-lg museo-label">{content?.featuredProjectStatus || 'In Progress / Specialized Facility'}</span>
           </div>
           <div className="flex flex-col gap-2">
             <span className="museo-label text-white/40 text-[9px] uppercase tracking-widest">Location</span>
-            <span className="text-white text-lg museo-label">Westwood, Massachusetts</span>
+            <span className="text-white text-lg museo-label">{content?.featuredProjectLocation || 'Westwood, Massachusetts'}</span>
           </div>
         </div>
       </div>

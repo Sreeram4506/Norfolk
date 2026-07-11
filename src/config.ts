@@ -170,18 +170,18 @@ export const exhibitionsConfig: ExhibitionsConfig = {
   headline: "Signature Projects",
   ctaText: "View Project",
   exhibitions: [
-    { 
-      id: 7, 
-      title: "Upcoming Project, Westwood", 
-      image: "/images/upcoming .jpeg", 
-      date: "Coming Soon" 
+    {
+      id: 8,
+      title: "Hedgerow",
+      image: "/images/hedgerow.jpeg",
+      date: "In Progress",
     },
     { 
       id: 1, 
-      title: "Porter Estate, Westwood MA", 
-      video: "/videos/Porter Estate, Westwood MA.mp4", 
+      title: "Porter Estate", 
+      video: "/videos/porter_estate.mp4", 
       date: "In Progress" 
-    },
+    }, 
     { 
       id: 2, 
       title: "Commercial Service Addition, Norwood MA", 

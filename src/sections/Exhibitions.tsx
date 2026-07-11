@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { exhibitionsConfig } from '../config';
+import type { SiteContent } from '../lib/siteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,7 +91,11 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
   );
 };
 
-const Exhibitions = () => {
+interface ExhibitionsProps {
+  exhibitions?: SiteContent['exhibitions'];
+}
+
+const Exhibitions = ({ exhibitions }: ExhibitionsProps) => {
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -167,9 +172,10 @@ const Exhibitions = () => {
     };
   }, [showAll]);
 
+  const sourceExhibitions = exhibitions?.length ? exhibitions : exhibitionsConfig.exhibitions;
   const visibleExhibitions = showAll 
-    ? exhibitionsConfig.exhibitions 
-    : exhibitionsConfig.exhibitions.slice(0, 2);
+    ? sourceExhibitions 
+    : sourceExhibitions.slice(0, 2);
 
   return (
     <section
@@ -192,7 +198,7 @@ const Exhibitions = () => {
         ))}
       </div>
 
-      {!showAll && exhibitionsConfig.exhibitions.length > 2 && (
+      {!showAll && sourceExhibitions.length > 2 && (
         <div ref={ctaRef} className="max-w-7xl mx-auto mt-12 flex justify-center">
           <button
             onClick={() => setShowAll(true)}

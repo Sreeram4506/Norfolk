@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 // Config
@@ -19,12 +20,14 @@ import Collections from './sections/Collections';
 import Visit from './sections/Visit';
 import Footer from './sections/Footer';
 import Chatbot from './components/Chatbot';
+import { defaultSiteContent, type SiteContent } from './lib/siteContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const mainRef = useRef<HTMLDivElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
+  const [siteContent] = useState<SiteContent>(defaultSiteContent);
 
   // Initialize smooth scroll
   useLenis();
@@ -88,34 +91,42 @@ function App() {
 
   return (
     <div ref={mainRef} className="relative">
-      {/* Hero Section */}
-      <div id="hero-section">
-        <Hero />
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <>
+              {/* Hero Section */}
+              <div id="hero-section">
+                <Hero heroVideo={siteContent.heroVideo} />
+              </div>
 
-      {/* About Section */}
-      <About />
+              {/* About Section */}
+              <About />
 
-      {/* Exhibitions Section */}
-      <Exhibitions />
+              {/* Exhibitions Section */}
+              <Exhibitions exhibitions={siteContent.exhibitions} />
 
-      {/* Featured Project Section */}
-      <FeaturedProject />
+              {/* Featured Project Section */}
+              <FeaturedProject content={siteContent} />
 
-      {/* Collections Section */}
-      <Collections />
+              {/* Collections Section */}
+              <Collections />
 
+              {/* Visit Section */}
+              <Visit />
 
-      {/* Visit Section */}
-      <Visit />
+              {/* Footer */}
+              <div id="footer-section">
+                <Footer />
+              </div>
 
-      {/* Footer */}
-      <div id="footer-section">
-        <Footer />
-      </div>
-
-      {/* AI Chatbot */}
-      <Chatbot />
+              {/* AI Chatbot */}
+              <Chatbot />
+            </>
+          )}
+        />
+      </Routes>
     </div>
   );
 }

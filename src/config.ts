@@ -126,7 +126,7 @@ export const siteConfig: SiteConfig = {
 export const heroConfig: HeroConfig = {
   brandLeft: "NORFOLK",
   brandRight: "DEVELOPMENT",
-  tagline: "Constructing the Next Level of Excellence.",
+  tagline: "",
   badge: "Norfolk County, MA",
   since: "Since 1987",
   email: "hello@norfolk-dev.com",
@@ -174,7 +174,7 @@ export const exhibitionsConfig: ExhibitionsConfig = {
       id: 8,
       title: "Hedgerow",
       image: "/images/hedgerow.jpeg",
-      date: "In Progress",
+      date: "Complete",
     },
     { 
       id: 1, 

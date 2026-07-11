@@ -126,7 +126,7 @@ export const siteConfig: SiteConfig = {
 export const heroConfig: HeroConfig = {
   brandLeft: "NORFOLK",
   brandRight: "DEVELOPMENT",
-  tagline: "Building Tomorrow's Landmarks Today",
+  tagline: "Constructing the Next Level of Excellence.",
   badge: "Norfolk County, MA",
   since: "Since 1987",
   email: "hello@norfolk-dev.com",

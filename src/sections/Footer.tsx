@@ -112,20 +112,31 @@ const Footer = () => {
             <p className="museo-body text-white/40 text-xs mb-4 md:mb-0">
               {currentYear} {footerConfig.brandName}. All rights reserved.
             </p>
-            {footerConfig.bottomLinks.length > 0 && (
-              <div className="flex items-center gap-6">
-                {footerConfig.bottomLinks.map((link, i) => (
-                  <a
-                    key={i}
-                    href={link.href}
-                    data-cursor="hover"
-                    className="museo-body text-white/40 text-xs hover:text-white/70 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            )}
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+              <a
+                href="https://indraam.com"
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="hover"
+                className="museo-body inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white/80 shadow-sm transition-all duration-300 hover:border-white/40 hover:bg-white/15 hover:text-white hover:-translate-y-0.5"
+              >
+                Powered by Indraam
+              </a>
+              {footerConfig.bottomLinks.length > 0 && (
+                <div className="flex items-center gap-6">
+                  {footerConfig.bottomLinks.map((link, i) => (
+                    <a
+                      key={i}
+                      href={link.href}
+                      data-cursor="hover"
+                      className="museo-body text-white/40 text-xs hover:text-white/70 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

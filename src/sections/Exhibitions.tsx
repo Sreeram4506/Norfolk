@@ -17,7 +17,7 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
     }
     if (exhibit.gallery && exhibit.gallery.length > 0) {
       intervalRef.current = setInterval(() => {
-        setActiveImageIndex((prev: number) => (prev + 1) % exhibit.gallery.length);
+        setActiveImageIndex((prev: number) => (prev + 1) % (exhibit.gallery.length + (exhibit.video ? 1 : 0)));
       }, 1200); // Change image every 1.2s for a better flow
     }
   };
@@ -44,27 +44,33 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
     >
       {/* Media (Image, Video, or Gallery) */}
       <div className="relative aspect-[4/3] overflow-hidden">
-        {exhibit.video ? (
-          <video
-            ref={videoRef}
-            src={exhibit.video}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            loop
-            muted
-            playsInline
-          />
-        ) : exhibit.gallery ? (
+        {exhibit.video || exhibit.gallery ? (
           <div className="w-full h-full relative">
-            {exhibit.gallery.map((src: string, index: number) => (
-              <img
-                key={src}
-                src={src}
-                alt={exhibit.title}
+            {exhibit.video && (
+              <video
+                ref={videoRef}
+                src={exhibit.video}
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${
-                  index === activeImageIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+                  activeImageIndex === 0 ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
                 }`}
+                loop
+                muted
+                playsInline
               />
-            ))}
+            )}
+            {exhibit.gallery?.map((src: string, index: number) => {
+              const mediaIndex = index + (exhibit.video ? 1 : 0);
+              return (
+                <img
+                  key={src}
+                  src={src}
+                  alt={exhibit.title}
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${
+                    mediaIndex === activeImageIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+                  }`}
+                />
+              );
+            })}
           </div>
         ) : exhibit.image ? (
           <img

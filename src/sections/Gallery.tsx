@@ -1,10 +1,67 @@
-import { galleryConfig } from '../config';
+import { useState } from 'react';
+import { galleryConfig, heroConfig } from '../config';
 
 const formatTitle = (title: string) => title.replace(/, /g, ', ');
 
 const Gallery = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    ...heroConfig.navLinks,
+  ];
+
+  const getGalleryPageHref = (href: string) => href.startsWith('#') ? `/${href}` : href;
+
   return (
-    <section id="gallery" className="relative w-full bg-[#101010] py-32 px-8 lg:px-16">
+    <section id="gallery" className="relative w-full min-h-screen bg-[#101010] py-32 px-8 lg:px-16">
+      <nav className="fixed top-0 left-0 w-full z-[100] px-6 lg:px-16 py-6 flex items-center justify-between bg-black/90 backdrop-blur-md border-b border-white/5">
+        <a href="/" aria-label="Norfolk Development home" className="flex items-center gap-4">
+          <img
+            src="/images/logo.png"
+            alt="Norfolk Development Logo"
+            className="h-8 md:h-12 w-auto object-contain"
+            style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
+          />
+        </a>
+
+        <div className="hidden md:flex items-center gap-10">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={getGalleryPageHref(link.href)}
+              className="museo-label text-white/80 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+          className="md:hidden text-white/80 hover:text-white p-3"
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          {isMenuOpen ? 'Close' : 'Menu'}
+        </button>
+      </nav>
+
+      {isMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-[90] bg-[#050505] flex flex-col items-center justify-center gap-7">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={getGalleryPageHref(link.href)}
+              className="museo-headline text-white text-3xl uppercase tracking-tighter"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto">
         <p className="museo-label text-white/50 mb-4">Visual Archive</p>
         <h2 className="museo-headline text-white text-4xl md:text-5xl lg:text-7xl mb-20">

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      const repositoryBase = '/Norfolk/';
+      const currentPath = window.location.pathname;
+      const route = currentPath.startsWith(repositoryBase)
+        ? currentPath.slice(repositoryBase.length - 1)
+        : currentPath;
+      const query = window.location.search;
+      const hash = window.location.hash;
+      window.location.replace(
+        repositoryBase + '?redirect=' + encodeURIComponent(route + query + hash)
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

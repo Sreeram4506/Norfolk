@@ -15,6 +15,7 @@ import useCustomCursor from './hooks/useCustomCursor';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import Exhibitions from './sections/Exhibitions';
+import Gallery from './sections/Gallery';
 import FeaturedProject from './sections/FeaturedProject';
 import Collections from './sections/Collections';
 import Visit from './sections/Visit';
@@ -122,6 +123,18 @@ function App() {
               </div>
 
               {/* AI Chatbot */}
+              <Chatbot />
+            </>
+          )}
+        />
+        <Route
+          path="/gallery"
+          element={(
+            <>
+              <Gallery />
+              <div id="footer-section">
+                <Footer />
+              </div>
               <Chatbot />
             </>
           )}

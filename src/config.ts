@@ -69,6 +69,11 @@ export interface ExhibitionsConfig {
   exhibitions: Exhibition[];
 }
 
+export interface GalleryConfig {
+  videos: { src: string; title: string }[];
+  images: { src: string; title: string }[];
+}
+
 
 export interface Collection {
   id: number;
@@ -137,6 +142,7 @@ export const heroConfig: HeroConfig = {
   navLinks: [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
+    { label: "Gallery", href: "/gallery" },
     { label: "Services", href: "#services" },
     { label: "Contact", href: "#contact" },
   ],
@@ -240,6 +246,34 @@ export const exhibitionsConfig: ExhibitionsConfig = {
       ],
       date: "New Development" 
     },
+  ],
+};
+
+export const galleryConfig: GalleryConfig = {
+  videos: [
+    { src: "/videos/hedgerow compketed.mp4", title: "Hedgerow Completed" },
+    { src: "/videos/Hedgerow Progress.mp4", title: "Hedgerow Progress" },
+    { src: "/videos/porter_estate.mp4", title: "Porter Estate" },
+    { src: "/videos/Porter Estate, Westwood MA.mp4", title: "Porter Estate, Westwood MA" },
+    { src: "/videos/Commercial Service Addition, Norwood MA.mp4", title: "Commercial Service Addition, Norwood MA" },
+    { src: "/videos/Pocahontas Addition. Walpole MA.mp4", title: "Pocahontas Addition, Walpole MA" },
+    { src: "/videos/KItchen Westwood.mp4", title: "Kitchen Westwood" },
+    { src: "/videos/Westwood Fire Training.mov", title: "Westwood Fire Training" },
+  ],
+  images: [
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.01 PM (1).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.01 PM (2).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.01 PM (3).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.01 PM.jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.02 PM (1).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.02 PM (2).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.02 PM (3).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.02 PM (4).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.02 PM (5).jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.02 PM.jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.03 PM.jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.19 PM.jpeg", title: "Hedgerow" },
+    { src: "/images/hedgerow/WhatsApp Image 2026-09-01 at 11.43.20 PM.jpeg", title: "Hedgerow" },
   ],
 };
 

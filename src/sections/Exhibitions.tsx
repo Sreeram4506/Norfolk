@@ -53,6 +53,7 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${
                   activeImageIndex === 0 ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
                 }`}
+                autoPlay
                 loop
                 muted
                 playsInline

@@ -11,24 +11,28 @@ const ExhibitCard = ({ exhibit }: { exhibit: any }) => {
   const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
   const intervalRef = useRef<any>(null);
 
+  useEffect(() => {
+    if (!exhibit.gallery?.length) return;
+
+    intervalRef.current = setInterval(() => {
+      setActiveImageIndex((prev: number) => (prev + 1) % (exhibit.gallery.length + (exhibit.video ? 1 : 0)));
+    }, 1200);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    };
+  }, [exhibit.gallery, exhibit.video]);
+
   const handleMouseEnter = () => {
     if (videoRef.current) {
       videoRef.current.play().catch(() => {});
-    }
-    if (exhibit.gallery && exhibit.gallery.length > 0) {
-      intervalRef.current = setInterval(() => {
-        setActiveImageIndex((prev: number) => (prev + 1) % (exhibit.gallery.length + (exhibit.video ? 1 : 0)));
-      }, 1200); // Change image every 1.2s for a better flow
     }
   };
 
   const handleMouseLeave = () => {
     if (videoRef.current) {
       videoRef.current.pause();
-    }
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
     }
     setActiveImageIndex(0);
   };

@@ -24,6 +24,7 @@ const Gallery = () => {
                     src={video.src}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     controls
+                    autoPlay
                     muted
                     playsInline
                     preload="metadata"

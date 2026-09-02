@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      const galleryMarker = '/gallery';
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.slice(0, currentPath.lastIndexOf(galleryMarker)) || '/';
+      window.location.replace(basePath + '?redirect=/gallery');
+    </script>
+  </head>
+  <body></body>
+</html>
